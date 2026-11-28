@@ -4,11 +4,11 @@ Before calling a task done, check the real result directly. Not a proxy, not a s
 
 **Why:** Unverified work has unknown correctness. Indirect checks (a file's modification time, a cached value, a subagent's summary, "the tests I wrote pass") feel cheaper than looking at the real thing, but acting on a wrong inference costs far more.
 
-- Run the feature the way a user would, and look at what it actually does.
-- Check the side effects too (files written, rows inserted, messages sent), not only what's visible.
+- When the change has behavior someone can run, run it the way a user would, and look at what it actually does.
+- When the code has side effects (files written, rows inserted, messages sent), check those too, not only what's visible.
 - Don't trust a dry-run or test mode by its name. Observe what it actually skips: some still touch the network or write files.
-- Read the actual value, not a cached or derived copy of it.
-- Review the actual diff or output of delegated work, not its summary.
+- Read the actual value, not a cached or derived copy of it, which can be stale.
+- When work was delegated, review its actual diff or output, not its summary.
 - When a check fails unexpectedly, suspect the check before the system. When it passes too easily, suspect it too.
 - A new check, test, or validator counts only after you've seen it fail on a known-bad input. A check that has never failed may not be checking anything.
 - Prefer a check you can script and rerun over a one-time look (see [script the work](script-the-work.md)). Keep its output so a reviewer can see it.

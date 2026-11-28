@@ -7,7 +7,7 @@ When work is repetitive or needs to be checkable, build the tool that does it or
 - Do the first unit by hand to learn the recipe, then script it. Check the script by rerunning it on that unit and comparing the result.
 - Make the script safe to rerun (see [make operations idempotent](make-operations-idempotent.md)).
 - A deterministic script beats parallel agents applying the same edit by hand.
-- Build the smallest script that does the job, never a framework.
+- Build the smallest script that does the job, not a framework: the script only has to do this one job.
 - Keep the script with the change when the work will outlive the session.
 
 **Skip it** when the change is a few obvious edits you can check at a glance.

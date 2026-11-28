@@ -11,6 +11,8 @@ disable-model-invocation: true
 
 Each principle is one short file in `references/`. Read the file in full before applying a principle; the one-line summaries below are only for choosing. When a principle changes a decision, say which principle and what it changed.
 
+These are practices, not rules. Apply one where it fits the situation, and leave it out where it doesn't.
+
 ## Simplicity
 
 - [Smallest change](references/smallest-change.md). Sizing a change, or tempted to add options, layers, or abstractions. Remove before adding, and build only for observed needs.

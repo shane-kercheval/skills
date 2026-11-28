@@ -1,6 +1,6 @@
 # Minimize reader load
 
-Maintainability is the work a reader must do to understand the code. Track two things:
+Maintainability is the work a reader must do to understand the code. When writing code, or changing code that is hard to follow, track two things:
 
 1. **Layers to trace:** how many indirections sit between a question and its answer.
 2. **State to hold:** how much hidden or mutable context the reader must keep in mind.
@@ -11,7 +11,7 @@ Maintainability is the work a reader must do to understand the code. Track two t
 - **Each layer should change the abstraction.** A layer that repeats the same methods and arguments as the one below adds reading without adding meaning.
 - **Prefer narrow interfaces that hide real decisions** over broad ones that hide little.
 - **Shrink the scope of state:** return values over mutation, locals over fields, fields over module state, module state over globals. Derive values instead of keeping copies in sync.
-- **State an invariant once, at the boundary,** not in every consumer.
+- **State an invariant once, at the boundary,** not in every consumer, where the copies can disagree.
 - Before adding a layer or a piece of state, ask whether it removes at least as much reading somewhere else.
 
 **The test:** can a new reader answer "where does X come from?" and "what can change X?" quickly? If not, cut layers or cut state.

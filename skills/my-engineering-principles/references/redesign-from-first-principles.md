@@ -1,6 +1,8 @@
 # Redesign from first principles
 
-When integrating a new requirement, don't bolt it onto the existing design. Ask what you would build if the requirement had been known from the start, and move toward that.
+When a new requirement doesn't fit the existing design, don't bolt it on. Ask what you would build if the requirement had been known from the start, and move toward that.
+
+**Why:** A requirement bolted onto a design built for something else leaves special cases around it, and each one makes the next change harder.
 
 - Read all the affected code and understand the current design first.
 - Ask: "if we were writing this from scratch with this requirement, what would we build?"
