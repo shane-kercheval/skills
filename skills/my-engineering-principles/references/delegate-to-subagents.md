@@ -11,4 +11,4 @@ When work is split across subagents, each one starts with nothing but its brief 
 - **Check the real output, not the summary.** Read the diff, the file, or the command output a worker produced before relying on it (see [prove it works](prove-it-works.md)).
 - **When more than one worker reports, merge the results into one report:** a compact table, one line per issue with its evidence, and explicit gaps. Raw worker output repeats itself and buries the issues, so don't paste it.
 
-**Before fanning out,** ask whether a script could do the job in one pass. A deterministic script beats parallel agents doing the same thing by hand (see [script the work](script-the-work.md)).
+**Before spawning several subagents,** ask whether a script could do the job in one pass. A deterministic script beats parallel agents doing the same thing by hand (see [script the work](script-the-work.md)).

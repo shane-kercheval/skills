@@ -8,7 +8,7 @@ Get the data shape right before writing logic, and encode the domain in a data s
 - A state machine instead of several booleans or phase flags.
 - A typed model instead of loose parameters or dictionaries whose shape everyone assumes.
 - A lookup table, registry, or tagged union instead of if/else chains spread across files.
-- A module organized around one area of knowledge, not around steps like load, validate, transform, save. Order of execution is not ownership.
+- A module organized around one area of knowledge, not around steps like load, validate, transform, save. Splitting by step spreads the knowledge of one format or rule across several modules.
 - The right collection for the access pattern: a queue, cache, index, or tree.
 
 Don't force an abstraction. Plain code is fine when the shape is already clear, local, and unlikely to grow.

@@ -2,11 +2,11 @@
 
 When designing types or signatures, use the type checker to rule out impossible states, mixed-up values, and unhandled cases before the code runs.
 
-- **Make illegal states unrepresentable.** Model variants as separate types (tagged unions, sealed classes, enums with data) rather than one record with optional fields whose valid combinations live in a comment. `{done: bool, done_at: date | None}` allows `done` with no date. Derive the flag from the date, or use two variants.
+- **Make illegal states unrepresentable.** Model variants as separate types (tagged unions, sealed classes, enums with data) rather than one record with optional fields whose valid combinations are stated only in a comment. `{done: bool, done_at: date | None}` allows `done` with no date. Derive the flag from the date, or use two variants.
 - **Give meaningful primitives their own type** when two could be swapped by mistake, such as a user ID and an order ID that are both strings. Validate once where the value is created.
 - **Parse external data at the boundary** into typed models, so the code inside can rely on the types (see [validate at the boundaries](validate-at-boundaries.md)).
 - **Don't override the type checker.** A cast, `Any`, or a suppression comment turns off a check, and the error that check would have reported then happens when the code runs. If the checker can't prove something, validate the value or change the types.
-- **Handle every variant exhaustively,** so adding a new variant makes the checker point at every place that needs a new case.
+- **Handle every variant exhaustively,** so adding a new variant makes the checker report every place that needs a new case.
 - **Derive types from the source of truth** (a schema, an API spec, a database model) instead of hand-writing a parallel type that can drift.
 - **Tighten a type only where it prevents a failure.** An assertion or a "should never happen" error marks a type that is too loose. Don't make types more precise just for the sake of it.
 

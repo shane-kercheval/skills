@@ -12,7 +12,7 @@
 - When merging `main` into a branch, merge the remote's latest (`origin/main`), not the local copy. Resolve only trivial conflicts, where both sides' intent is clear and compatible. For any other conflict, stop, explain what each side was trying to do, and ask.
 - After a merge, run the tests before pushing.
 - When a change would break existing callers, stored data, or a public API, ask whether backward compatibility is required. Don't assume either way.
-- Fix a problem in the system where it lives. When a workaround in another system is the better choice, for example because the fix there isn't possible or is riskier or slower to release, tell me why and get my approval before building it.
+- Fix a problem in the system that causes it. When a workaround in another system is the better choice, for example because the fix there isn't possible or is riskier or slower to release, tell me why and get my approval before building it.
 
 ## Writing
 
@@ -34,7 +34,7 @@
 
 - When a skill, these rules, or a prompt led you wrong or left out something you needed, suggest the edit in your reply: the change, and the mistake it prevents.
 - Never edit a skill or these global instructions unless I ask.
-- Agent memory may keep a lesson, but a lesson that should change how agents work also goes in a suggestion, because memory doesn't reach other tools or machines.
+- Agent memory may keep a lesson, but a lesson that should change how agents work also goes in a suggestion, because other tools and machines don't load this memory.
 
 ## Python
 

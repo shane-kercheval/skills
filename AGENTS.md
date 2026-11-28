@@ -12,7 +12,7 @@ This file is for agents working on this repo. It is not one of the global files.
 
 - Pushing to `main` is fine in this repo.
 - This repo is public: keep private repo names, PR numbers and customer details out of files and commit messages.
-- Create and edit skills in `skills/`, never in `~/.claude/skills/` or `~/.agents/skills/`. New skills there are invisible to other machines.
+- Create and edit skills in `skills/`, never in `~/.claude/skills/` or `~/.agents/skills/`. A skill created there is not in this repo, so other machines don't get it.
 - Edit global instructions in `global/`, never in `~/.claude/CLAUDE.md` or `~/.codex/AGENTS.md`. `make sync` replaces those files, so an edit there survives only in a backup.
 - Never edit `~/.claude/skills/synced/`. Claude Code downloads it from the user's claude.ai account and overwrites it.
 - After adding, renaming, or editing a skill or anything in `global/`, run `make validate`, fix every ERROR, and fix warnings unless there is a stated reason. Then run `make sync`.
@@ -62,7 +62,7 @@ At startup each tool sees only every skill's `name` and `description`. The agent
 
 ### Automatic or invoke-only
 
-Every automatic skill puts its name and description into both tools' startup listings. The listings have a fixed budget, and overlapping descriptions make the agent's choice unpredictable. So keep the automatic skills few, with descriptions that no one request matches twice.
+Every automatic skill puts its name and description into both tools' startup listings. The listings have a fixed character limit, and overlapping descriptions make the agent's choice unpredictable. So keep the automatic skills few, and write their descriptions so that no request matches two of them.
 
 A trigger must be distinct from everyday requests too, not only from other skills. "Why" also starts debugging questions ("why does this test fail?"), which is why `my-why` is invoke-only.
 
@@ -74,7 +74,7 @@ A trigger must be distinct from everyday requests too, not only from other skill
 | A workflow you run by name | Invoke-only: `make new NAME=x MANUAL=1` | `my-architect`, `my-review-code`, `my-implementation-plan`, `my-switchboard-orchestrator` |
 | Library that other skills read | Invoke-only, with content in `references/` | `my-engineering-principles` |
 
-Invoke-only needs both settings: `disable-model-invocation: true` in `SKILL.md` (Claude Code) and `policy: allow_implicit_invocation: false` in `agents/openai.yaml` (Codex). Tested on 2026-09-23: with those, neither tool lists the skill, and `/name` or `$name` still invokes it. `make validate` warns when only one is set, and reports how much of the listing budget the automatic skills use.
+Invoke-only needs both settings: `disable-model-invocation: true` in `SKILL.md` (Claude Code) and `policy: allow_implicit_invocation: false` in `agents/openai.yaml` (Codex). Tested on 2026-09-23: with those, neither tool lists the skill, and `/name` or `$name` still invokes it. `make validate` warns when only one is set, and reports how many of the listing's characters the automatic skills use.
 
 ### The body
 
@@ -87,7 +87,7 @@ Invoke-only needs both settings: `disable-model-invocation: true` in `SKILL.md` 
 ### Work in both Claude Code and Codex
 
 - Write tool-neutral instructions: "read the file", "run the tests", "spawn a subagent". Don't name a single tool's functions (`AskUserQuestion`, `Task`) unless the skill only makes sense in that tool. If so, say so in the description.
-- To point at another skill's content, link the file by relative path: `[prove it works](../my-engineering-principles/references/prove-it-works.md)`. Don't rely on the agent invoking a skill by name, because Claude Code blocks invoking an invoke-only skill. Reading its files still works. Both tools tell the agent the skill's folder, and `make sync` puts every skill side by side, so `../` links resolve. `make validate` reports any relative link whose target doesn't exist, so rename a file and fix its links in the same change.
+- To point at another skill's content, link the file by relative path: `[prove it works](../my-engineering-principles/references/prove-it-works.md)`. Don't rely on the agent invoking a skill by name, because Claude Code blocks invoking an invoke-only skill. Reading its files still works. Both tools tell the agent the skill's folder, and `make sync` links every skill into the same folder, so `../` links resolve. `make validate` reports any relative link whose target doesn't exist, so rename a file and fix its links in the same change.
 - Use plain relative links, not `${CLAUDE_SKILL_DIR}`. Codex doesn't substitute it.
 - Claude Code-only frontmatter (`disable-model-invocation`, `user-invocable`, `allowed-tools`, `context`, `model`, `paths`) is not in Codex's docs. Assume Codex ignores it.
 
@@ -95,8 +95,8 @@ Invoke-only needs both settings: `disable-model-invocation: true` in `SKILL.md` 
 
 After `make sync`, test the skill in fresh sessions of both tools. A skill added during a session may not appear in that session.
 
-1. **It loads when it should.** From a directory where the request makes sense, send a request that doesn't name the skill: `claude -p "<request>" --output-format stream-json --verbose` and `codex exec "<request>"`. Confirm it loaded from the tool calls, not from the agent's own account: a `Skill` call naming it in Claude Code's log, or a read of its `SKILL.md` in Codex's output. Invoke an invoke-only skill by name instead (`/name` or `$name`).
-2. **It doesn't load when it shouldn't.** For an automatic skill, also send the nearest everyday request it shouldn't take, and confirm it doesn't load. For `my-why`, that would be a debugging question.
+1. **It loads when it should.** From a directory where the request makes sense, send a request that doesn't name the skill: `claude -p "<request>" --output-format stream-json --verbose` and `codex exec "<request>"`. Confirm it loaded from the tool calls, not from what the agent says it did: a `Skill` call naming it in Claude Code's log, or a read of its `SKILL.md` in Codex's output. Invoke an invoke-only skill by name instead (`/name` or `$name`).
+2. **It doesn't load when it shouldn't.** For an automatic skill, also send the most similar everyday request that it should not load for, and confirm it doesn't load. For `my-why`, that would be a debugging question.
 3. **It does what it says.** Check the output against the skill's steps. Use a throwaway project for skills that edit code.
 
 ## Global instructions

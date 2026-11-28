@@ -10,4 +10,4 @@ When the same correction comes up a second time, turn it into a mechanism (a lin
 
 **Choose the strongest mechanism that fits,** roughly in this order: a type that makes the mistake impossible to write, then a lint rule or test that fails CI, then a shared helper, then a runtime check. People and agents copy what the surrounding code already does, so a weak guard becomes the next template.
 
-**Close the loop.** When a correction happens, decide whether it's a one-off or a pattern, and either apply the fix now or record a concrete follow-up. "I'll keep that in mind" doesn't persist.
+**Act on a correction when it happens.** Decide whether it's a one-off or a pattern, and either apply the fix now or record a concrete follow-up. "I'll keep that in mind" doesn't persist.
