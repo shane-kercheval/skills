@@ -67,7 +67,7 @@ Break work into small steps that each end in a state you can check, and don't st
 
 - Put foundations first: anything that helps every later step (test setup, shared types, a baseline measurement) goes before the features that depend on it.
 - In a sweep of similar edits, check each change before making the next.
-- Order commits so they tell the story: a failing test, then the fix; setup, then the feature. Each commit stands on its own.
+- Order commits so a reviewer can follow the change by reading them in order: a failing test, then the fix; setup, then the feature. Each commit stands on its own.
 
 ### Script the work
 

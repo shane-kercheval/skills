@@ -50,7 +50,7 @@ Claude Code shows at most 1,536 characters of `description` plus `when_to_use`. 
 
 ### Descriptions decide whether a skill is used
 
-At startup each tool sees only every skill's `name` and `description`. The agent picks a skill by matching the task against the description, so a weak description means the skill never loads.
+At startup each tool sees only every skill's `name` and `description`. The agent picks a skill by matching the task against the description, so a skill whose description lacks the words in the user's request does not load for that request.
 
 - Say what the skill does and when to use it: "Reviews Python diffs for missing type hints and imports inside functions. Use when reviewing Python code or before the user commits Python changes."
 - Write in third person. "Reviews diffs", not "I can review" or "You can use this to".

@@ -10,7 +10,7 @@ metadata:
 
 The writing rules in your global instructions, under "How to write", apply to every document. This skill adds what only documents need.
 
-**The test:** read each sentence as someone who has never seen this conversation or the system. If it only makes sense after reading the details below it, it's a label, not a sentence.
+**The test:** read each sentence as someone who has never seen this conversation or the system. If a sentence makes sense only after the reader has read the details below it, add the detail it depends on to the sentence.
 
 ## Pick the document type first
 
