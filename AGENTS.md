@@ -83,6 +83,7 @@ Invoke-only needs both settings: `disable-model-invocation: true` in `SKILL.md` 
 - Move long reference material into `references/`, scripts into `scripts/`, and templates into `assets/`. Link each file from `SKILL.md` with a relative path and say when to read it. Keep references one level deep.
 - Prefer a script over prose for anything that must be exact or repeatable.
 - Avoid facts that change (dates, versions, "the new API"), unless the skill says when they were checked.
+- An agent reads "always", "never", "first", and "every" as having no exceptions. Use them only for an instruction that has none. "Reproduce the bug first" stops an agent from reading the code before it reproduces the bug, even when reading the code is the faster way to find the cause.
 
 ### Work in both Claude Code and Codex
 
